@@ -1,0 +1,61 @@
+<style>
+.platform-android .action-sheet .action-sheet-title, .platform-android .action-sheet .button {
+    text-align: center !important;
+    background: #145b4b !important;
+    color: #fff !important;
+    width: 90% !important;
+    margin: 18px auto !important;
+}
+</style>
+<ion-side-menus enable-menu-with-back-views="false">
+  <ion-side-menu-content ion-side-menu-content-scale>
+    <ion-nav-bar class="background-color text-white">
+    <ion-nav-back-button>
+    </ion-nav-back-button>
+
+    <ion-nav-buttons side="left">
+      <button class="button button-icon text-white boder-white" menu-toggle="left">
+        Menu
+      </button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+      <button class="button button-icon text-white boder-white" onclick="javascript:history.go(-1)">
+        Back
+      </button>
+    </ion-nav-buttons>
+   </ion-nav-bar>
+
+    <ion-nav-view name="menuContent"></ion-nav-view>
+
+</ion-side-menu-content class="menu-content bar-calm menu-left-axis">
+ <ion-side-menu side="left" expose-aside-when="large">
+    <ion-content class="menu-content"> 
+     <div class="background-transparent list">
+        <div class="item background-transparent" style="padding: 44px;">
+          <h2 class="text-white text-center fs-20">{{userFName}} <span ng-if="userLName!='null'">{{userLName}}</span></h2>
+          <p class="text-center fs-16" style="color: #FFF;">{{userEmail}}</p>
+        </div>
+        <div ui-sref="nav.home" ng-class="(activefeild == 'home')? 'side-menu-active':''" ng-click="activefeild = 'home'" class="background-transparent item text-white menu-line-height" nav-clear menu-close>
+          <img src="img/home.png" align="left" style="width: 25px !important;margin-right: 10px !important;" />
+          Home
+        </div>
+        <div nav-clear menu-close ui-sref="nav.complaint" ng-class="(activefeild == 'complain')? 'side-menu-active':''" ng-click="activefeild = 'complain'" class="background-transparent item text-white menu-line-height">
+          <img src="img/edit.png" align="left" style="width: 25px !important;margin-right: 10px !important;" />
+          Compliment/Complain
+        </div>
+        <div nav-clear menu-close ui-sref="profile" ng-class="(activefeild == 'profile')? 'side-menu-active':''" ng-click="activefeild = 'profile'" class="background-transparent item text-white menu-line-height">
+          <img src="img/profile.png" align="left" style="width: 25px !important;margin-right: 10px !important;" />
+          Profile
+        </div>
+        <div nav-clear menu-close ui-sref="resetpassword" ng-class="(activefeild == 'password')? 'side-menu-active':''" ng-click="activefeild = 'password'" class="background-transparent item text-white menu-line-height">
+         <img src="img/password.png" align="left" style="width: 25px !important;margin-right: 10px !important;" />
+          Password
+        </div>
+        <div ng-class="(activefeild == 'signout')? 'side-menu-active':''" ng-click="activefeild = 'signout' ; show()" class="background-transparent item text-white menu-line-height">
+          <img src="img/logout.png" align="left" style="width: 25px !important;margin-right: 10px !important;" />
+          Sign out
+        </div>
+      </div>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>

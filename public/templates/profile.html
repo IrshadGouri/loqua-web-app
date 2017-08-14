@@ -1,0 +1,30 @@
+<ion-view>
+  <ion-header-bar class="background-color">
+    <button onclick="javascript:history.go(-1)" class="button button-icon text-white boder-white header-btn-left">Back</button>
+    <div class="h1 title text-white text-center">EDIT PROFILE</div>
+  </ion-header-bar>
+  <ion-content class="padding">
+    <div class="list">
+      <div class="profile-pic">
+        <img ng-src="{{userProfile}}" err-src="img/ben.png" class="profile-pic-img">
+        <i ng-click="show()" class="ion-camera profile-camera"></i>
+      </div>
+      <h2 class="text-center text-dark no-margin fs-14 font-style">Add your Profile Photo</h2>
+      <div style="padding: 18% 0;">
+        <label class="item item-input item-stacked-label border-bottom">
+          <span class="input-label text-dark fs-12">NAME</span>
+          <input type="text" ng-model="updateForm.name" placeholder="John">
+        </label>
+        <label class="item item-input item-stacked-label border-bottom">
+          <span class="input-label text-dark fs-12">EMAIL</span>
+          <input type="email" ng-model="updateForm.email" placeholder="John@gmail.com">
+        </label>
+        <label class="item item-input item-stacked-label border-bottom">
+          <span class="input-label text-dark fs-12">TWITTER</span>
+          <input type="text"  ng-model="updateForm.user_name" placeholder="@your_twitter">
+        </label>
+      </div>
+    </div>
+    <button ng-click="updateUser();" class="button button-block menu-content text-white">UPDATE</button>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,88 @@
+<ion-view hide-nav-bar="true">
+  <ion-header-bar class="background-color">
+    <button ng-if="!userId"  ui-sref="signup" class="button button-icon text-white boder-white header-btn-left">Join</button>
+    <button ng-if="userId" class="button button-icon text-white boder-white header-btn-left" menu-toggle="left">Menu</button>
+    <div class="h1 title">
+    <center>
+      <img src="img/logo.jpg" class="header-img" ui-sref="nav.home">
+    </center>
+    </div>
+    <button ng-if="!userId" ui-sref="login" class="button button-icon text-white boder-white header-btn-right">Sign in</button>
+    <button ng-if="userId"  ui-sref="nav.complaint" class="button button-icon icon ion-edit text-white boder-white header-btn-right"></button>
+  </ion-header-bar>
+  <ion-content scroll="false">
+      <ion-tabs class="tabs-striped tabs-top tabs-background-positive tabs-color-light">
+
+        <ion-tab title="{{todayDate}}" ng-click="today(0)" icon-on="" icon-off="">
+        <!-- ng-click="today('1')" -->
+          <ion-content scroll="true" style="top: 49px !important;">
+            <div class="list">
+              <a class="item item-avatar item-text-wrap border-bottom1" ng-repeat="today in todays track by $index" ng-click="gotoDetail(today);" style="border-color: rgb(239, 235, 235) !important;margin:0px">
+                <img ng-src="{{today.user.social_profile_url}}" err-src="img/ben.png">
+                <i ng-if="today.type!='Compliment'" class="sad"></i>
+                <i ng-if="today.type=='Compliment'" class="happy"></i>
+                <p class="text-gray float-right-top fs-12 font-style">{{today.created_at | date:'h:mma'}}</p>
+                <h2 class="margin-5">{{today.user.first_name | capitalize}} {{today.user.last_name | capitalize}} <span ng-if="today.type=='Compliment'" class="text-dark"> complimented </span> <span ng-if="today.type!='Compliment'" class="text-red"> complained </span> <span class="text-gray font-style"> {{today.how_does_to_make}} </span><span class="text-green"> @{{today.company_name}} for </span><span class="text-gray font-style"> {{today.description}}</span></h2>
+                <p style="margin: -3px;" class="text-dark float-right-bottom font-style fs-12 font-700">{{today.where}}</p>
+              </a>
+            </div>
+          </ion-content>
+        </ion-tab>
+
+        <ion-tab title="{{yesterdayDate| date:'dd/MM/yyyy'}}" ng-click="yesterday(1)"  icon-on="" icon-off="">
+        <!-- ng-click="towmarrow('2')" -->
+         <ion-content scroll="true" style="top: 50px !important;">
+            <div class="row no-padding">
+              <div class="col col-50" style="padding-right: 2.5px;">
+                  <a class="item text-center text-white background-green" style="border-color: #ddd !important;">
+                    <h2 class="text-white">GOLD STARS</h2>
+                    <span class="icon ion-happy"></span> <span class="icon ion-happy"></span> <span class="icon ion-happy"></span> <span class="icon ion-happy"></span> <span class="icon ion-happy"></span>
+                  </a>
+              </div>
+              <div class="col col-50" style="padding-left: 2.5px;padding-right: 2% !important;">
+                  <a class="item text-center text-white background-red" style="border-color: #ddd !important;">
+                    <h2 class="text-white">HEART BREAKERS</h2>
+                    <span class="icon ion-sad"></span> <span class="icon ion-sad"></span> <span class="icon ion-sad"></span> <span class="icon ion-sad"></span> <span class="icon ion-sad"></span>
+                  </a>
+              </div>
+            </div>
+            <table style="width: 100% !important;">
+            <tr style="width: 100% !important;">
+              <td>
+                 <div class="list no-margin no-padding" ng-repeat="yesterday_compliment in yesterday_compliments track by $index" >
+                  <a class="item text-center no-padding" style="height: 112px;border-color: #ddd !important;">
+                    <img ng-if="yesterday_compliment.company_brand_image!=null" ng-src="{{yesterday_compliment.company_brand_image}}" class="img-right">
+                    <img ng-if="yesterday_compliment.company_brand_image==null" ng-src="img/ben.png" class="img-right">
+                    <h2 style="margin-top: 35px;margin-left: 10px;text-align: left;" class="text-green">1. {{yesterday_compliment.company_name}}</h2>
+                    <p style="padding-left: 25px;text-align: left;width: 100%;">{{yesterday_compliment.compliment_count}} Compliments</p>
+                    <p style="margin-right: 30px;"><span  ng-class="(yesterday_compliment.rating > 0)? 'happy-icon':'inhappy-icon'"></span><span style="margin-left: -9px !important;" ng-class="(yesterday_compliment.rating > 1)? 'happy-icon':'inhappy-icon'"></span><span style="margin-left: 17px !important;" ng-class="(yesterday_compliment.rating > 2)? 'happy-icon':'inhappy-icon'"></span><span style="margin-left: 42px !important;" ng-class="(yesterday_compliment.rating > 3)? 'happy-icon':'inhappy-icon'"></span><span style="margin-left:69px !important;" ng-class="(yesterday_compliment.rating > 4)? 'happy-icon':'inhappy-icon'"></span></p>
+                  </a>
+              </div>
+              </td>
+              <td>
+
+                <div class="list no-margin no-padding" ng-repeat="yesterday_complaint in yesterday_complaints track by $index">
+                  <a class="item text-center no-padding" style="height: 112px;border-color: #ddd !important;">
+                    <img ng-if="yesterday_complaint.company_brand_image!=null" ng-src="{{yesterday_complaint.company_brand_image}}" class="img-right">
+                    <img ng-if="yesterday_complaint.company_brand_image==null" ng-src="img/ben.png" class="img-right">
+                    <h2 style="margin-top: 35px;margin-left: 10px;text-align: left;" class="text-red">1. {{yesterday_complaint.company_name}}</h2>
+                    <p style="padding-left: 25px;text-align: left;width: 100%;">{{yesterday_complaint.compliment_count}} Compliments</p>
+                    <p style="margin-right: 30px;"><span ng-class="(yesterday_complaint.rating > 0)? 'sad-icon':'insad'"></span><span style="margin-left: -9px !important;" ng-class="(yesterday_complaint.rating > 1)? 'sad-icon':'insad'"></span><span style="margin-left: 17px !important;" ng-class="(yesterday_complaint.rating > 2)? 'sad-icon':'insad'"></span><span style="margin-left: 42px !important;" ng-class="(yesterday_complaint.rating > 3)? 'sad-icon':'insad'"></span><span style="margin-left:69px !important;" ng-class="(yesterday_complaint.rating > 4)? 'sad-icon':'insad'"></span></p>
+                  </a>
+              </div>
+              </td>
+           </tr>
+           </table>
+           <!-- <div class="row no-padding" style="padding: 5px 5px 0px !important;width: 50.5% !important;" > -->
+             
+            <!-- </div> -->
+            <!-- <div class="row no-padding" style="padding: 5px 5px 0px !important;width: 50.5% !important;" > -->
+             
+            <!-- </div> -->
+           
+         </ion-content>
+        </ion-tab>
+
+      </ion-tabs>
+  </ion-content>
+</ion-view>

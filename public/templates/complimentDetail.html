@@ -1,0 +1,42 @@
+<ion-view hide-nav-bar="true">
+  <ion-header-bar class="background-color">
+    <button onclick="javascript:history.go(-1)" class="button button-icon text-white boder-white header-btn-left">Back</button>
+    <div class="h1 title text-white">COMPLIMENT</div>
+    <button ui-sref="nav.complaint" class="button button-icon text-white boder-white header-btn-right">Edit</button>
+  </ion-header-bar>
+  <ion-content>
+    <div class="list padding" style="padding-top: 5% !important;">
+      <button class="button button-icon ion-ios-upload-outline fs-26" ng-click="share()" style="float: right;font-size: 30px !important;"></button>
+      <div class="profile-pic">
+        <img ng-src="{{homeObj.user.social_profile_url}}" class="profile-pic-img">
+        <i class="happy" style="margin: -23px 0 0 66px !important;"></i>
+      </div>
+      <div class="list" style="margin-bottom: 30px;">
+        <center><span ng-class="(homeObj.rating > 0)? 'happ-active':'happ-inactive'"></span> <span style="margin-left: -40px !important;"  ng-class="(homeObj.rating > 1)? 'happ-active':'happ-inactive'"></span> <span style="margin-left: -10px !important;"  ng-class="(homeObj.rating > 2)? 'happ-active':'happ-inactive'""></span>
+        <span  style="margin-left: 20px !important;" ng-class="(homeObj.rating > 3)? 'happ-active':'happ-inactive'"></span>
+        <span  style="margin-left: 50px !important;"  ng-class="(homeObj.rating > 4)? 'happ-active':'happ-inactive'"></span></center>
+
+      </div>
+      <p class="text-gray text-center fs-12 no-margin font-style">{{homeObj.created_at | date:'EEEE, MMM dd yyyy'}}</p>
+      <p class="text-dark text-center fs-12 no-margin font-style font-bold">{{homeObj.where}}</p>
+      <br />
+      <h2 class="margin-5 fs-16">{{homeObj.user.first_name}} <span class="first-letter-visible" ng-if="homeObj.user.last_name!='null'">{{homeObj.user.last_name | capitalize}}</span> <span class="text-dark"> complimented </span><span class="text-gray font-style"> {{homeObj.how_does_to_make}} </span><span class="text-green"> @{{homeObj.company_name}} for </span><span class="text-gray font-style"> {{homeObj.description}}</span></h2>
+
+      <label class="item item-text-wrap no-border no-padding margin-5" style="padding-bottom: 12px !important;">
+        <span class="input-label text-black fs-16 font-bold">Details :</span>
+        <p class="text-gray font-style">{{homeObj.why}}</p>
+      </label>
+
+      <label class="item item-text-wrap no-border no-padding margin-5" style="padding-bottom: 12px !important;">
+        <span class="input-label text-black fs-16 font-bold" style="width: 100%;padding-bottom: 10px !important;">It made {{homeObj.user.first_name}} <span class="first-letter-visible" ng-if="homeObj.user.last_name!='null'">{{homeObj.user.last_name | capitalize}}</span> feel :</span>
+        <span class="green-buble">{{homeObj.how_does_to_make}}</span>
+        <!-- <span class="green-buble">demo</span><span class="green-buble">Appreciated</span> -->
+      </label>
+      <!-- <div class="item item-body"> -->
+      <br />
+        <button ng-class="(homeObj.votes_status == true)? 'text-green':'text-gray'" ng-click="setFavirate(homeObj.id, homeObj)" class="button button-clear icon ion-thumbsup"> Agree</button>
+        <button ng-class="(homeObj.votes_status == false)? 'text-green':'text-gray'" ng-click="setUnFavirate(homeObj.id, homeObj)" class="button button-clear text-gray icon ion-thumbsdown button-padding"> Disgree</button>
+      <!-- </div> -->
+    </div>
+  </ion-content>
+</ion-view>
