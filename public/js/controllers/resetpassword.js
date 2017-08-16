@@ -11,7 +11,7 @@ angular.module('ResetPassword.controllers', [])
 			}
 			console.log($scope.user);
 			APIService.updateData({
-	            req_url: 'https://loqua.herokuapp.com/users/password',
+	            req_url: 'https://loqua-mobile.herokuapp.com/users/password',
 	            data: $scope.user
 	        }).then(function(resp) {
 	        	console.log(resp);
